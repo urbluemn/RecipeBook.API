@@ -7,7 +7,7 @@ namespace Recipes.Persistence
 {
     public class RecipeDbContext : DbContext, IRecipeDbContext
     {
-        public DbSet<Domain.Recipe> Models { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
 
         public RecipeDbContext(DbContextOptions<RecipeDbContext> options) : base(options) { }
 

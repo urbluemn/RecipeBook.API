@@ -13,11 +13,11 @@ namespace Recipes.Persistence.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<Recipe> builder)
         {
-            builder.HasKey(model => model.Id);
-            builder.HasIndex(model => model.Id).IsUnique();
-            builder.Property(model => model.Name).HasMaxLength(50);
-            builder.Property(model => model.Description).HasMaxLength(50);
-            builder.Property(model => model.Details).HasMaxLength(200);
+            builder.HasKey(recipe => recipe.Id);
+            builder.HasIndex(recipe => recipe.Id).IsUnique();
+            builder.Property(recipe => recipe.Name).HasMaxLength(50);
+            builder.Property(recipe => recipe.Description).HasMaxLength(50);
+            builder.Property(recipe => recipe.Details).HasMaxLength(200);
         }
     }
 }
