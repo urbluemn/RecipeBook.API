@@ -12,8 +12,8 @@ namespace Recipes.Application.Common.Mappings
     public class AssemblyMappingProfile : Profile
     {
         public AssemblyMappingProfile(Assembly assembly) =>
-            ApplyMappingsFromAssemly(assembly);
-        private void ApplyMappingsFromAssemly(Assembly assembly)
+            ApplyMappingsFromAssembly(assembly);
+        private void ApplyMappingsFromAssembly(Assembly assembly)
         {
             var types = assembly.GetExportedTypes()
                 .Where(type => type.GetInterfaces()
