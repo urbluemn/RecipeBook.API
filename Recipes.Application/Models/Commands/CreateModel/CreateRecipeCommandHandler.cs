@@ -9,6 +9,10 @@ using Recipes.Application.Interfaces;
 
 namespace Recipes.Application.Models.Commands.CreateModel
 {
+    //TODO: return Model instead of Guid
+    /// <summary>
+    /// Create Recipe
+    /// </summary>
     public class CreateRecipeCommandHandler : IRequestHandler<CreateRecipeCommand, Guid>
     {
         private readonly IRecipeDbContext _dbContext;

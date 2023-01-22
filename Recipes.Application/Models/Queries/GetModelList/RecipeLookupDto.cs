@@ -9,6 +9,9 @@ using Recipes.Domain;
 
 namespace Recipes.Application.Models.Queries.GetModelList
 {
+    /// <summary>
+    /// Returns List of userId's and it's Recipes
+    /// </summary>
     public class RecipeLookupDto : IMapWith<Recipe>
     {
         public Guid Id { get; set; }

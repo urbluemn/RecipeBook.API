@@ -7,7 +7,10 @@ using MediatR;
 
 namespace Recipes.Application.Models.Queries.GetModelDetails
 {
-    public class GetModelDetailsQuery : IRequest<ModelDetailsVm>
+    /// <summary>
+    /// Mapped Model Query
+    /// </summary>
+    public class GetRecipeDetailsQuery : IRequest<RecipeDetailsVm>
     {
         public Guid UserId { get; set; }
         public Guid Id { get; set; }

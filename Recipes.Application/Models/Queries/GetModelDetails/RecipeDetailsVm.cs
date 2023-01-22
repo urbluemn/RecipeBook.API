@@ -9,7 +9,10 @@ using Recipes.Domain;
 
 namespace Recipes.Application.Models.Queries.GetModelDetails
 {
-    public class ModelDetailsVm : IMapWith<Recipe>
+    /// <summary>
+    /// Mapped Recipe Model
+    /// </summary>
+    public class RecipeDetailsVm : IMapWith<Recipe>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -20,7 +23,7 @@ namespace Recipes.Application.Models.Queries.GetModelDetails
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Recipe, ModelDetailsVm>()
+            profile.CreateMap<Recipe, RecipeDetailsVm>()
                 .ForMember(recipeVm => recipeVm.Id, opts =>
                     opts.MapFrom(recipe => recipe.Id))
                 .ForMember(recipeVm => recipeVm.Name,

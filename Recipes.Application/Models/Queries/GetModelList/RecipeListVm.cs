@@ -8,6 +8,9 @@ using Recipes.Domain;
 
 namespace Recipes.Application.Models.Queries.GetModelList
 {
+    /// <summary>
+    /// List of Recipes
+    /// </summary>
     public class RecipeListVm
     {
         public IList<RecipeLookupDto> Recipes { get; set; }

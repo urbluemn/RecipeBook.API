@@ -11,6 +11,10 @@ using Recipes.Application.Interfaces;
 
 namespace Recipes.Application.Models.Queries.GetModelList
 {
+    //TODO: Change to return every Recipe not concrete users Recipes
+    /// <summary>
+    /// Return List of Recipes
+    /// </summary>
     public class GetRecipeListQueryHandler : IRequestHandler<GetRecipeListQuery, RecipeListVm>
     {
         private readonly IRecipeDbContext _dbContext;

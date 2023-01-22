@@ -7,6 +7,10 @@ using MediatR;
 
 namespace Recipes.Application.Models.Queries.GetModelList
 {
+    
+    /// <summary>
+    /// Getting concrete users List fo Recipes
+    /// </summary>
     public class GetRecipeListQuery : IRequest<RecipeListVm>
     {
         public Guid UserId { get; set; }

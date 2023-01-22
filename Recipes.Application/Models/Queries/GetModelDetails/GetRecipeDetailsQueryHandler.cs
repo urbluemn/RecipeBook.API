@@ -12,15 +12,15 @@ using Recipes.Domain;
 
 namespace Recipes.Application.Models.Queries.GetModelDetails
 {
-    public class GetModelDetailsQueryHandler : IRequestHandler<GetModelDetailsQuery, ModelDetailsVm>
+    public class GetRecipeDetailsQueryHandler : IRequestHandler<GetRecipeDetailsQuery, RecipeDetailsVm>
     {
         private readonly IRecipeDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public GetModelDetailsQueryHandler(IRecipeDbContext dbContext, IMapper mapper) =>
+        public GetRecipeDetailsQueryHandler(IRecipeDbContext dbContext, IMapper mapper) =>
             (_dbContext, _mapper) = (dbContext, mapper);
         
-        public async Task<ModelDetailsVm> Handle(GetModelDetailsQuery request, CancellationToken cancellationToken)
+        public async Task<RecipeDetailsVm> Handle(GetRecipeDetailsQuery request, CancellationToken cancellationToken)
         {
             var entity = await _dbContext.Recipes
                 .FirstOrDefaultAsync(recipe => recipe.Id == request.Id, cancellationToken);
@@ -29,7 +29,7 @@ namespace Recipes.Application.Models.Queries.GetModelDetails
                 throw new NotFoundException(nameof(Recipe), request.Id);
             }
 
-            return _mapper.Map<ModelDetailsVm>(entity);
+            return _mapper.Map<RecipeDetailsVm>(entity);
         }
     }
 }
