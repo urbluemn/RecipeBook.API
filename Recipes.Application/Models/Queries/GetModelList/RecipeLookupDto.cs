@@ -16,6 +16,7 @@ namespace Recipes.Application.Models.Queries.GetModelList
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -24,7 +25,10 @@ namespace Recipes.Application.Models.Queries.GetModelList
                     opts => opts.MapFrom(recipe => recipe.Id))
                 .ForMember(recipeDto => recipeDto.Name,
                     opts =>
-                    opts.MapFrom(recipe => recipe.Name));
+                    opts.MapFrom(recipe => recipe.Name))
+                .ForMember(recipeDto => recipeDto.Description,
+                    opts =>
+                        opts.MapFrom(recipe => recipe.Description));
         }
     }
 }

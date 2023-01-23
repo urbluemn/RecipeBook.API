@@ -9,7 +9,7 @@ namespace Recipes.Application.Models.Queries.GetModelList
 {
     
     /// <summary>
-    /// Getting concrete users List fo Recipes
+    /// Choosing concrete user List of Recipes
     /// </summary>
     public class GetRecipeListQuery : IRequest<RecipeListVm>
     {

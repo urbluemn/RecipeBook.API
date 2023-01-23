@@ -24,9 +24,11 @@ namespace Recipes.Application.Models.Commands.CreateModel
                 UserId = request.UserID,
                 Name = request.Name,
                 Description = request.Decription,
+                Details = request.Details,
                 Id = Guid.NewGuid(),
                 CreationDate = DateTime.Now,
-                Details = request.Details
+                EditDate = null
+                
             };
 
             await _dbContext.Recipes.AddAsync(recipe, cancellationToken);

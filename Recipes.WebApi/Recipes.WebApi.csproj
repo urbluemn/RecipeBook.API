@@ -6,4 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Recipes.Application\Recipes.Application.csproj" />
+    <ProjectReference Include="..\Recipes.Persistence\Recipes.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>
