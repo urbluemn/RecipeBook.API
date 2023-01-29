@@ -23,7 +23,7 @@ namespace Recipes.Application.Models.Commands.CreateModel
             {
                 UserId = request.UserID,
                 Name = request.Name,
-                Description = request.Decription,
+                Description = request.Description,
                 Details = request.Details,
                 Id = Guid.NewGuid(),
                 CreationDate = DateTime.Now,

@@ -12,7 +12,7 @@ namespace Recipes.Application.Models.Commands.CreateModel
     {
         public Guid UserID { get; set; }
         public string Name { get; set; }
-        public string Decription { get; set; }
+        public string Description { get; set; }
         public string? Details { get; set; }
     }
 }

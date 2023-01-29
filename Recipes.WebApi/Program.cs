@@ -15,6 +15,7 @@ builder.Services.AddAutoMapper(config =>
 });
 builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddControllers();
 builder.Services.AddCors(opts =>
 {
     opts.AddPolicy("AllowAll", policy =>
@@ -23,6 +24,10 @@ builder.Services.AddCors(opts =>
         policy.AllowAnyMethod();
         policy.AllowAnyOrigin();
     });
+    //opts.AddPolicy("Default", policy =>
+    //{
+    //    policy.
+    //});
 });
 var app = builder.Build();
 
@@ -42,7 +47,10 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-
+app.UseRouting();
+app.UseHttpsRedirection();
+app.UseCors("AllowAll");
+app.MapControllers();
 
 
 //app.MapControllerRoute(
