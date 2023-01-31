@@ -46,8 +46,8 @@ namespace Recipes.WebApi.Controllers
         {
             var command = _mapper.Map<CreateRecipeCommand>(createRecipeDto);
             command.UserID = UserId;
-            var noteid = await Mediator.Send(command);
-            return Ok(noteid);
+            var recipeId = await Mediator.Send(command);
+            return Ok(recipeId);
         }
 
         [HttpPut]

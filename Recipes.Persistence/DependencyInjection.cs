@@ -15,7 +15,7 @@ namespace Recipes.Persistence
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration["DbConnection"];
-            services.AddDbContext<RecipeDbContext>(opts =>
+            services.AddDbContext<IRecipeDbContext, RecipeDbContext>(opts =>
             {
                 opts.UseSqlite(connectionString);
             });

@@ -4,6 +4,7 @@ using Recipes.Application;
 using Recipes.Application.Common.Mappings;
 using Recipes.Application.Interfaces;
 using Recipes.Persistence;
+using Recipes.WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+app.UseCustomExceptionHandler();
 app.UseRouting();
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
