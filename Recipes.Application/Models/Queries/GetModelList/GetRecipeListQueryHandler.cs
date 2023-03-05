@@ -20,7 +20,7 @@ namespace Recipes.Application.Models.Queries.GetModelList
         private readonly IRecipeDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public GetRecipeListQueryHandler(IRecipeDbContext dbContext, IMapper mapper) => 
+        public GetRecipeListQueryHandler(IRecipeDbContext dbContext, IMapper mapper) =>
             (_dbContext, _mapper) = (dbContext, mapper);
 
         public async Task<RecipeListVm> Handle(GetRecipeListQuery request, CancellationToken cancellationToken)
@@ -32,6 +32,5 @@ namespace Recipes.Application.Models.Queries.GetModelList
 
             return new RecipeListVm { Recipes = recipeQuery };
         }
-
     }
 }

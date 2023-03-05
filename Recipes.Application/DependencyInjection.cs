@@ -12,7 +12,7 @@ using Recipes.Application.Common.Behaviors;
 namespace Recipes.Application
 {
     /// <summary>
-    /// Configuring Dependency Injection Extension for MediatR 
+    /// Configuring Dependency Injection Extension for MediatR
     /// </summary>
     public static class DependencyInjection
     {

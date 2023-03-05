@@ -9,6 +9,5 @@ namespace Recipes.Application.Interfaces
     {
         DbSet<Recipe> Recipes { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
-
     }
 }

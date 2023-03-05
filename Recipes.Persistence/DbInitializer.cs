@@ -8,8 +8,8 @@ namespace Recipes.Persistence
 {
     public class DbInitializer
     {
-        public static void Initialize(RecipeDbContext context) 
-        { 
+        public static void Initialize(RecipeDbContext context)
+        {
             context.Database.EnsureCreated();
         }
     }

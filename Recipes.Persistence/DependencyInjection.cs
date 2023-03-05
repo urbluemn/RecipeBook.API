@@ -11,7 +11,6 @@ namespace Recipes.Persistence
         /// <summary>
         /// Configuring Dependency Injection Extension for DB
         /// </summary>
-        
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration["DbConnection"];

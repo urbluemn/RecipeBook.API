@@ -28,7 +28,6 @@ namespace Recipes.Application.Models.Commands.CreateModel
                 Id = Guid.NewGuid(),
                 CreationDate = DateTime.Now,
                 EditDate = null
-                
             };
 
             await _dbContext.Recipes.AddAsync(recipe, cancellationToken);

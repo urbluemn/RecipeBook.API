@@ -19,7 +19,6 @@ namespace Recipes.Application.Models.Queries.GetModelDetails
 
         public GetRecipeDetailsQueryHandler(IRecipeDbContext dbContext, IMapper mapper) =>
             (_dbContext, _mapper) = (dbContext, mapper);
-        
         public async Task<RecipeDetailsVm> Handle(GetRecipeDetailsQuery request, CancellationToken cancellationToken)
         {
             var entity = await _dbContext.Recipes

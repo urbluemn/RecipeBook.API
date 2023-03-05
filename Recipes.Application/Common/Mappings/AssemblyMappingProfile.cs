@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 
-
 namespace Recipes.Application.Common.Mappings
 {
     public class AssemblyMappingProfile : Profile

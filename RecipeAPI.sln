@@ -13,11 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{47273EC2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recipes.Domain", "Recipes.Domain\Recipes.Domain.csproj", "{9A33CE10-6E4D-4B4A-B1A9-7BF9BA35D560}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recipes.Application", "Recipes.Application\Recipes.Application.csproj", "{609212B5-E038-4F9D-87C5-72A76E824A3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recipes.Application", "Recipes.Application\Recipes.Application.csproj", "{609212B5-E038-4F9D-87C5-72A76E824A3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recipes.Persistence", "Recipes.Persistence\Recipes.Persistence.csproj", "{1DC0E447-9B86-4A34-AD8F-6A323CA0E743}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recipes.Persistence", "Recipes.Persistence\Recipes.Persistence.csproj", "{1DC0E447-9B86-4A34-AD8F-6A323CA0E743}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recipes.WebApi", "Recipes.WebApi\Recipes.WebApi.csproj", "{936525B8-A8A5-48B7-A4BC-FF2B48F0AB5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recipes.WebApi", "Recipes.WebApi\Recipes.WebApi.csproj", "{936525B8-A8A5-48B7-A4BC-FF2B48F0AB5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

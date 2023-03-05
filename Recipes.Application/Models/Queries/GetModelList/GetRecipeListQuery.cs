@@ -7,7 +7,6 @@ using MediatR;
 
 namespace Recipes.Application.Models.Queries.GetModelList
 {
-    
     /// <summary>
     /// Choosing concrete user List of Recipes
     /// </summary>

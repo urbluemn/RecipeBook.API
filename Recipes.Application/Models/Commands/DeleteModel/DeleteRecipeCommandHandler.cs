@@ -27,9 +27,7 @@ namespace Recipes.Application.Models.Commands.DeleteModel
 
             _dbContext.Recipes.Remove(entity);
             await _dbContext.SaveChangesAsync(cancellationToken);
-            
             return Unit.Value;
-            
         }
     }
 }

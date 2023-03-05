@@ -37,8 +37,6 @@ namespace Recipes.Application.Models.Queries.GetModelDetails
                     opts.MapFrom(recipe => recipe.CreationDate))
                 .ForMember(recipeVm => recipeVm.EditDate, opts =>
                     opts.MapFrom(recipe => recipe.EditDate));
-
-
         }
     }
 }
