@@ -10,6 +10,7 @@ namespace Recipes.Persistence
     {
         public static void Initialize(RecipeDbContext context)
         {
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
         }
     }
