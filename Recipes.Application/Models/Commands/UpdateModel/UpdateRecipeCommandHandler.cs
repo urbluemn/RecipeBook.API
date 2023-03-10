@@ -21,7 +21,7 @@ namespace Recipes.Application.Models.Commands.UpdateModel
         {
             var entity = await _dbContext.Recipes.FirstOrDefaultAsync(recipe => recipe.Id == request.Id, cancellationToken);
 
-            if (entity == null || entity.UserId != request.UserID)
+            if (entity == null || entity.UserId != request.UserId)
             {
                 throw new NotFoundException(nameof(Recipe), request.Id);
             }

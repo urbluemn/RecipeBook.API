@@ -18,7 +18,7 @@ namespace Recipes.Application.Models.Commands.UpdateModel
             RuleFor(updateRecipeCommand =>
                 updateRecipeCommand.Details).NotEmpty().MaximumLength(1000);
             RuleFor(updateRecipeCommand =>
-                updateRecipeCommand.UserID).NotEqual(Guid.Empty);
+                updateRecipeCommand.UserId).NotEqual(Guid.Empty);
             RuleFor(updateRecipeCommand =>
                 updateRecipeCommand.Id).NotEqual(Guid.Empty);
         }

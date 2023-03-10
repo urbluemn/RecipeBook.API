@@ -21,7 +21,7 @@ namespace Recipes.Application.Models.Commands.CreateModel
         {
             var recipe = new Recipe
             {
-                UserId = request.UserID,
+                UserId = request.UserId,
                 Name = request.Name,
                 Description = request.Description,
                 Details = request.Details,

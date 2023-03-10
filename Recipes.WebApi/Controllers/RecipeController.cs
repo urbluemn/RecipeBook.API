@@ -49,7 +49,7 @@ namespace Recipes.WebApi.Controllers
         public async Task<ActionResult<Guid>> Create([FromBody] CreateRecipeDto createRecipeDto)
         {
             var command = _mapper.Map<CreateRecipeCommand>(createRecipeDto);
-            command.UserID = UserId;
+            command.UserId = UserId;
             var recipeId = await Mediator.Send(command);
             return Ok(recipeId);
         }
@@ -59,7 +59,7 @@ namespace Recipes.WebApi.Controllers
         public async Task<IActionResult> Update([FromBody] UpdateRecipeDto updateRecipeDto)
         {
             var command = _mapper.Map<UpdateRecipeCommand>(updateRecipeDto);
-            command.UserID = UserId;
+            command.UserId = UserId;
             await Mediator.Send(command);
             return NoContent();
         }

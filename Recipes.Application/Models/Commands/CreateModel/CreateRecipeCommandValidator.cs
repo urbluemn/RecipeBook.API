@@ -18,7 +18,7 @@ namespace Recipes.Application.Models.Commands.CreateModel
             RuleFor(createRecipeCommand =>
                 createRecipeCommand.Details).NotEmpty().MaximumLength(1000);
             RuleFor(createRecipeCommand =>
-                createRecipeCommand.UserID).NotEqual(Guid.Empty);
+                createRecipeCommand.UserId).NotEqual(Guid.Empty);
         }
     }
 }
