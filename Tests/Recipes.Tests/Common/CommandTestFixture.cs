@@ -20,7 +20,4 @@ namespace Recipes.Tests.Common
             RecipesContextFactory.Destroy(Context);
         }
     }
-
-    [CollectionDefinition("CommandCollection")]
-    public class CommandCollection : ICollectionFixture<CommandTestFixture> { }
 }
