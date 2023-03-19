@@ -7,13 +7,13 @@ using Recipes.Application.Models.Commands.DeleteModel;
 using Recipes.Application.Models.Commands.UpdateModel;
 using Recipes.Application.Models.Queries.GetModelDetails;
 using Recipes.Application.Models.Queries.GetModelList;
-using Recipes.Domain;
 using Recipes.WebApi.Models;
 
 namespace Recipes.WebApi.Controllers
 {
+    [ApiVersionNeutral]
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/{version:apiVersion}/[controller]")]
     public class RecipeController : BaseController
     {
         private readonly IMapper _mapper;

@@ -1,13 +1,19 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.Options;
 using Recipes.Application;
 using Recipes.Application.Common.Mappings;
 using Recipes.Application.Interfaces;
 using Recipes.Persistence;
+using Recipes.WebApi;
 using Recipes.WebApi.Middleware;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Configure
 builder.Services.AddAutoMapper(config =>
 {
     config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
@@ -40,13 +46,21 @@ builder.Services.AddAuthentication(config =>
         opts.Audience = "RecipeWebAPI";
     });
 
-builder.Services.AddSwaggerGen(config =>
-{
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    config.IncludeXmlComments(xmlPath);
-});
+builder.Services.AddVersionedApiExplorer(opts =>
+    opts.GroupNameFormat = "'v'VVV");
+builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>,
+    ConfigureSwaggerOptions>();
+builder.Services.AddSwaggerGen();
+builder.Services.AddApiVersioning(options =>
+    {
+        options.ReportApiVersions = true;
+        options.AssumeDefaultVersionWhenUnspecified = true;
+    });
+
 var app = builder.Build();
+
+//Setup
+var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
 using (var scope = app.Services.CreateScope())
 {
@@ -63,12 +77,21 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-app.UseSwagger();
-app.UseSwaggerUI(config =>
+app.UseApiVersioning();
+if(app.Environment.IsDevelopment())
 {
-    config.RoutePrefix = string.Empty;
-    config.SwaggerEndpoint("swagger/v1/swagger.json", "Recipes API");
-});
+    app.UseSwagger();
+    app.UseSwaggerUI(config =>
+    {
+        foreach (var description in provider.ApiVersionDescriptions)
+        {
+            config.SwaggerEndpoint(
+                $"/swagger/{description.GroupName}/swagger.json",
+                description.GroupName.ToUpperInvariant());
+            config.RoutePrefix = string.Empty;
+        }
+    });
+}
 app.UseCustomExceptionHandler();
 app.UseRouting();
 app.UseHttpsRedirection();

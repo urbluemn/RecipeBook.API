@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Recipes.Persistence
 {
-    public class DbInitializer
+    public static class DbInitializer
     {
         public static void Initialize(RecipeDbContext context)
         {
