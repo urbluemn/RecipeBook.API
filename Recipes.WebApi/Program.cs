@@ -21,7 +21,8 @@ builder.Services.AddAutoMapper(config =>
 });
 builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddRazorRuntimeCompilation();
 builder.Services.AddCors(opts =>
 {
     opts.AddPolicy("AllowAll", policy =>
@@ -60,8 +61,6 @@ builder.Services.AddApiVersioning(options =>
 var app = builder.Build();
 
 //Setup
-var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
-
 using (var scope = app.Services.CreateScope())
 {
     var serviceProvider = scope.ServiceProvider;
@@ -76,6 +75,8 @@ using (var scope = app.Services.CreateScope())
         logger.LogError(exception, "An error occurred while app initialization.");
     }
 }
+
+var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
 app.UseApiVersioning();
 if(app.Environment.IsDevelopment())

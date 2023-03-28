@@ -13,14 +13,12 @@ namespace Recipes.Persistence
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
             //SQLite db
-            var connectionString = configuration["DbConnection"];
+            // var connectionString = configuration["DbConnection"];
 
             //SQLServer db
-            //var connectionString = configuration["SqlServerDbConnect"];
+            var connectionString = configuration["SqlServerDbConnect"];
             services.AddDbContext<IRecipeDbContext, RecipeDbContext>(opts =>
-            {
-                opts.UseSqlite(connectionString);
-            });
+                opts.UseSqlServer(connectionString));
             services.AddScoped<IRecipeDbContext, RecipeDbContext>(/*provider => provider.GetService<RecipeDbContext>()*/);
             return services;
         }
