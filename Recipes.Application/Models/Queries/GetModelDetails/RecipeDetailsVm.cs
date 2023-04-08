@@ -14,6 +14,7 @@ namespace Recipes.Application.Models.Queries.GetModelDetails
     /// </summary>
     public class RecipeDetailsVm : IMapWith<Recipe>
     {
+        public string Username { get; set; }
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -24,11 +25,12 @@ namespace Recipes.Application.Models.Queries.GetModelDetails
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Recipe, RecipeDetailsVm>()
+                .ForMember(recipeVm => recipeVm.Username, opts =>
+                    opts.MapFrom(recipe => recipe.Username))
                 .ForMember(recipeVm => recipeVm.Id, opts =>
                     opts.MapFrom(recipe => recipe.Id))
-                .ForMember(recipeVm => recipeVm.Name,
-                    opts =>
-                        opts.MapFrom(recipe => recipe.Name))
+                .ForMember(recipeVm => recipeVm.Name, opts =>
+                    opts.MapFrom(recipe => recipe.Name))
                 .ForMember(recipeVm => recipeVm.Description, opts =>
                     opts.MapFrom(recipe => recipe.Description))
                 .ForMember(recipeVm => recipeVm.Details, opts =>

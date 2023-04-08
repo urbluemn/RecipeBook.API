@@ -1,42 +1,42 @@
 using System;
-using Shouldly;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Recipes.Application.Models.Queries.GetModelList;
 using Recipes.Persistence;
 using Recipes.Tests.Common;
+using Shouldly;
 
 namespace Recipes.Tests.Recipes.Queries
 {
     [Collection("QueryCollection")]
-    public class GetRecipeListQueryHandlerTests
+    public class GetAllRecipeListQueryHandlerTests
     {
         private readonly RecipeDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetRecipeListQueryHandlerTests(QueryTestFixture fixture)
+        public GetAllRecipeListQueryHandlerTests(QueryTestFixture fixture)
         {
             _context = fixture.Context;
             _mapper = fixture.Mapper;
         }
 
         [Fact]
-        public async Task GetRecipeListQueryHandler_Success()
+        public async Task GetAllRecipeListQueryHandler_Success()
         {
             //Arrange
-            var handler = new GetRecipeListQueryHandler(_context, _mapper);
+            var handler = new GetAllRecipeListQueryHandler(_context, _mapper);
 
             //Act
             var result = await handler.Handle(
-                new GetRecipeListQuery
-                {
-                    UserId = RecipesContextFactory.UserAId
-                },
+                new GetAllRecipeListQuery(),
                 CancellationToken.None
             );
 
             //Assert
             result.ShouldBeOfType<RecipeListVm>();
-            result.Recipes.Count.ShouldBe(2);
+            result.Recipes.Count.ShouldBe(4);
         }
     }
 }

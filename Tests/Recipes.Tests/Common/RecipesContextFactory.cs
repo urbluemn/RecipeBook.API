@@ -10,6 +10,9 @@ namespace Recipes.Tests.Common
         public static Guid UserAId = Guid.NewGuid();
         public static Guid UserBId = Guid.NewGuid();
 
+        public static string UserAName = "UserAName";
+        public static string UserBName = "UserBName";
+
         public static Guid RecipeIdForDelete = Guid.NewGuid();
         public static Guid RecipeIdForUpdate = Guid.NewGuid();
 
@@ -22,6 +25,7 @@ namespace Recipes.Tests.Common
             context.Database.EnsureCreated();
             context.Recipes.AddRange(
                 new Recipe{
+                    Username = UserAName,
                     CreationDate = DateTime.Today,
                     Details = "Details1",
                     Description = "Description1",
@@ -31,6 +35,7 @@ namespace Recipes.Tests.Common
                     UserId = UserAId
                 },
                 new Recipe{
+                    Username = UserBName,
                     CreationDate = DateTime.Today,
                     Details = "Details2",
                     Description = "Description2",
@@ -40,6 +45,7 @@ namespace Recipes.Tests.Common
                     UserId = UserBId
                 },
                 new Recipe{
+                    Username = UserAName,
                     CreationDate = DateTime.Today,
                     Details = "Details3",
                     Description = "Description3",
@@ -49,6 +55,7 @@ namespace Recipes.Tests.Common
                     UserId = UserAId
                 },
                 new Recipe{
+                    Username = UserBName,
                     CreationDate = DateTime.Today,
                     Details = "Details4",
                     Description = "Description4",

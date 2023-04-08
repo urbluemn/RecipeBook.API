@@ -7,12 +7,12 @@ using FluentValidation;
 
 namespace Recipes.Application.Models.Queries.GetModelList
 {
-    public class GetRecipeListQueryValidator : AbstractValidator<GetRecipeListQuery>
+    public class GetRecipeListQueryValidator : AbstractValidator<GetUsersRecipeListQuery>
     {
         public GetRecipeListQueryValidator()
         {
             RuleFor(getRecipelistDetails =>
-                getRecipelistDetails.UserId).NotEqual(Guid.Empty);
+                getRecipelistDetails.Username).NotEmpty();
         }
     }
 }

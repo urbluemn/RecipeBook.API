@@ -23,7 +23,7 @@ namespace Recipes.Application.Models.Queries.GetModelDetails
         {
             var entity = await _dbContext.Recipes
                 .FirstOrDefaultAsync(recipe => recipe.Id == request.Id, cancellationToken);
-            if (entity == null || entity.UserId != request.UserId)
+            if (entity == null)
             {
                 throw new NotFoundException(nameof(Recipe), request.Id);
             }

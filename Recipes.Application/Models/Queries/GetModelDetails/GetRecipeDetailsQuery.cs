@@ -12,7 +12,6 @@ namespace Recipes.Application.Models.Queries.GetModelDetails
     /// </summary>
     public class GetRecipeDetailsQuery : IRequest<RecipeDetailsVm>
     {
-        public Guid UserId { get; set; }
         public Guid Id { get; set; }
     }
 }

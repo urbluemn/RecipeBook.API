@@ -35,7 +35,8 @@ namespace Recipes.Tests.Recipes.Commands
                     Name = recipeName,
                     Details = recipeDetails,
                     Description = recipeDescription,
-                    UserId = RecipesContextFactory.UserAId
+                    UserId = RecipesContextFactory.UserAId,
+                    Username = RecipesContextFactory.UserAName
                 },
                 CancellationToken.None
             );

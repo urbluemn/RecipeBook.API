@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Security.Claims;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -21,6 +22,7 @@ namespace Recipes.Application.Models.Commands.CreateModel
         {
             var recipe = new Recipe
             {
+                Username = request.Username,
                 UserId = request.UserId,
                 Name = request.Name,
                 Description = request.Description,

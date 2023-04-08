@@ -2,6 +2,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Options;
 using Recipes.Application;
 using Recipes.Application.Common.Mappings;
@@ -23,6 +24,7 @@ builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddControllers()
     .AddRazorRuntimeCompilation();
+
 builder.Services.AddCors(opts =>
 {
     opts.AddPolicy("AllowAll", policy =>
@@ -31,11 +33,8 @@ builder.Services.AddCors(opts =>
         policy.AllowAnyMethod();
         policy.AllowAnyOrigin();
     });
-    //opts.AddPolicy("Default", policy =>
-    //{
-    //    policy.
-    //});
 });
+
 builder.Services.AddAuthentication(config =>
     {
         config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -47,15 +46,27 @@ builder.Services.AddAuthentication(config =>
         opts.Audience = "RecipeWebAPI";
     });
 
+//Configure swagger
 builder.Services.AddVersionedApiExplorer(opts =>
-    opts.GroupNameFormat = "'v'VVV");
+{
+    opts.GroupNameFormat = "'v'VVV";
+    opts.SubstituteApiVersionInUrl = true;
+});
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>,
     ConfigureSwaggerOptions>();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApiVersioning(options =>
     {
+        options.DefaultApiVersion = new ApiVersion(1,0);
         options.ReportApiVersions = true;
         options.AssumeDefaultVersionWhenUnspecified = true;
+
+        options.ApiVersionReader = ApiVersionReader.Combine(
+            new UrlSegmentApiVersionReader(),
+            new QueryStringApiVersionReader("x-api-version"),
+            new HeaderApiVersionReader("x-api-version"),
+            new MediaTypeApiVersionReader("x-api-version"));
     });
 
 var app = builder.Build();

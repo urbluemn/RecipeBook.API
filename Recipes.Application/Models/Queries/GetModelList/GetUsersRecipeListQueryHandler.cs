@@ -11,11 +11,10 @@ using Recipes.Application.Interfaces;
 
 namespace Recipes.Application.Models.Queries.GetModelList
 {
-    //TODO: Change to return every Recipe not concrete users Recipes
     /// <summary>
     /// Return List of Recipes
     /// </summary>
-    public class GetRecipeListQueryHandler : IRequestHandler<GetRecipeListQuery, RecipeListVm>
+    public class GetRecipeListQueryHandler : IRequestHandler<GetUsersRecipeListQuery, RecipeListVm>
     {
         private readonly IRecipeDbContext _dbContext;
         private readonly IMapper _mapper;
@@ -23,10 +22,10 @@ namespace Recipes.Application.Models.Queries.GetModelList
         public GetRecipeListQueryHandler(IRecipeDbContext dbContext, IMapper mapper) =>
             (_dbContext, _mapper) = (dbContext, mapper);
 
-        public async Task<RecipeListVm> Handle(GetRecipeListQuery request, CancellationToken cancellationToken)
+        public async Task<RecipeListVm> Handle(GetUsersRecipeListQuery request, CancellationToken cancellationToken)
         {
             var recipeQuery = await _dbContext.Recipes
-                .Where(recipe => recipe.UserId == request.UserId)
+                .Where(recipe => recipe.Username == request.Username)
                 .ProjectTo<RecipeLookupDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 

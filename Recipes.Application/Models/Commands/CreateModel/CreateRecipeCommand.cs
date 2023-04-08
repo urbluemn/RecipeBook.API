@@ -10,6 +10,7 @@ namespace Recipes.Application.Models.Commands.CreateModel
 {
     public class CreateRecipeCommand : IRequest<Guid>
     {
+        public string Username { get; set; }
         public Guid UserId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

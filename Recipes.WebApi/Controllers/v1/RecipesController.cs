@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+using System.Security.Claims;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,23 +10,23 @@ using Recipes.Application.Models.Queries.GetModelDetails;
 using Recipes.Application.Models.Queries.GetModelList;
 using Recipes.WebApi.Models;
 
-namespace Recipes.WebApi.Controllers
+namespace Recipes.WebApi.Controllers.v1
 {
-    [ApiVersionNeutral]
+    [ApiVersion("1.0")]
     [Produces("application/json")]
-    [Route("api/{version:apiVersion}/[controller]")]
-    public class RecipeController : BaseController
+    [Route("api/v1/[controller]")]
+    public class RecipesController : BaseController
     {
         private readonly IMapper _mapper;
 
-        public RecipeController(IMapper mapper) => _mapper = mapper;
+        public RecipesController(IMapper mapper) => _mapper = mapper;
 
         /// <summary>
-        /// Gets the list of recipes
+        /// Gets all recipes
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// GET /recipe
+        /// GET /recipes
         /// </remarks>
         /// <returns>Returns RecipeListVm</returns>
         /// <response code="200">Success</response>
@@ -34,11 +35,32 @@ namespace Recipes.WebApi.Controllers
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<RecipeListVm>> GetAll()
+        public async Task<ActionResult<RecipeListVm>> GetAllRecipes()
         {
-            var query = new GetRecipeListQuery
+            var query = new GetAllRecipeListQuery();
+            var vm = await Mediator.Send(query);
+            return Ok(vm);
+        }
+
+        /// <summary>
+        /// Gets the list of users recipes
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /recipes/{user}
+        /// </remarks>
+        /// <returns>Returns RecipeListVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If user is unauthorized</response>
+        [HttpGet("{username}")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<RecipeListVm>> GetAllUsersRecipes(string username)
+        {
+            var query = new GetUsersRecipeListQuery
             {
-                UserId = UserId
+                Username = username
             };
             var vm = await Mediator.Send(query);
             return Ok(vm);
@@ -49,13 +71,13 @@ namespace Recipes.WebApi.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// GET /recipe/{id}
+        /// GET /recipes/{id}
         /// </remarks>
         /// <param name="id">Recipe id (guid)</param>
         /// <returns>Returns RecipeDetailsVm</returns>
         /// <response code="200">Success</response>
         /// <response code="401">If user is unauthorized</response>
-        [HttpGet("{id}")]
+        [HttpGet("{id:guid}")]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -63,7 +85,6 @@ namespace Recipes.WebApi.Controllers
         {
             var query = new GetRecipeDetailsQuery
             {
-                UserId = UserId,
                 Id = id
             };
             var vm = await Mediator.Send(query);
@@ -75,7 +96,7 @@ namespace Recipes.WebApi.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// POST /recipe
+        /// POST /recipes
         /// {
         ///     name: "recipe name",
         ///     description: "recipe description",
@@ -94,6 +115,7 @@ namespace Recipes.WebApi.Controllers
         {
             var command = _mapper.Map<CreateRecipeCommand>(createRecipeDto);
             command.UserId = UserId;
+            command.Username = Username;
             var recipeId = await Mediator.Send(command);
             return Ok(recipeId);
         }
@@ -103,7 +125,7 @@ namespace Recipes.WebApi.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// PUT /recipe/{id}
+        /// PUT /recipes/{id}
         /// {
         ///     name: "updated recipe name"
         /// }
@@ -129,7 +151,7 @@ namespace Recipes.WebApi.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// DELETE /recipe/{id}
+        /// DELETE /recipes/{id}
         /// </remarks>
         /// <param name="id">Id of the recipe (guid)</param>
         /// <returns>Returns NoContent</returns>

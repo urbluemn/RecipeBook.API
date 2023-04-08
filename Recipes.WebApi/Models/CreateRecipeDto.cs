@@ -13,8 +13,6 @@ namespace Recipes.WebApi.Models
         public string Description { get; set; }
         [Required]
         public string Details { get; set; }
-        //public DateTime CreationDate { get; set; }
-        //public DateTime EditDate { get; set; }
 
         public void Mapping(Profile profile)
         {

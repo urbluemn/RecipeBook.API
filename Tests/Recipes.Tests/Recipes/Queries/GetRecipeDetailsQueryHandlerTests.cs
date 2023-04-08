@@ -32,7 +32,6 @@ namespace Recipes.Tests.Recipes.Queries
             var result = await handler.Handle(
                 new GetRecipeDetailsQuery
                 {
-                    UserId = RecipesContextFactory.UserBId,
                     Id = Guid.Parse("63EC94EF-8819-4F3B-91FE-BC12EC3ACD44")
                 },
                 CancellationToken.None
@@ -43,6 +42,7 @@ namespace Recipes.Tests.Recipes.Queries
             result.Name.ShouldBe("Name2");
             result.Details.ShouldBe("Details2");
             result.Description.ShouldBe("Description2");
+            result.Username.ShouldBe("UserBName");
         }
     }
 }

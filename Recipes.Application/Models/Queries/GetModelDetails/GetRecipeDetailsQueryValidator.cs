@@ -13,8 +13,6 @@ namespace Recipes.Application.Models.Queries.GetModelDetails
         {
             RuleFor(getRecipeDetails =>
                 getRecipeDetails.Id).NotEqual(Guid.Empty);
-            RuleFor(getRecipeDetails =>
-                getRecipeDetails.UserId).NotEqual(Guid.Empty);
         }
     }
 }

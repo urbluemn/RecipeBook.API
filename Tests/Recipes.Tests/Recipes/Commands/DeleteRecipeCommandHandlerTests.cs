@@ -70,7 +70,8 @@ namespace Recipes.Tests.Recipes.Commands
                     Name = "RecipeName",
                     Description = "RecipeDescription",
                     Details = "RecipeDetails",
-                    UserId = RecipesContextFactory.UserAId
+                    UserId = RecipesContextFactory.UserAId,
+                    Username = RecipesContextFactory.UserAName
                 },
                 CancellationToken.None
             );
