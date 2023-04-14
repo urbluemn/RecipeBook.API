@@ -1,22 +1,19 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
-    <PackageReference Include="FluentValidation" Version="11.5.1" />
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.1" />
-    <PackageReference Include="MediatR" Version="11.1.0" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.14" />
+    <PackageReference Include="AutoMapper" Version="12.0.1"/>
+    <PackageReference Include="FluentValidation" Version="11.5.1"/>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.1"/>
+    <PackageReference Include="MediatR" Version="11.1.0"/>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.14"/>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="6.0.0-preview.4.21253.5"/>
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\Recipes.Domain\Recipes.Domain.csproj" />
+    <ProjectReference Include="..\Recipes.Domain\Recipes.Domain.csproj"/>
   </ItemGroup>
-
 </Project>

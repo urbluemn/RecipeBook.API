@@ -11,5 +11,13 @@ namespace Recipes.Application.Models.Queries.GetModelList
     /// </summary>
     public class GetAllRecipeListQuery : IRequest<RecipeListVm>
     {
+        // public int pageSize { get; set; }
+        // public int pageNumber { get; set; }
+
+        // public GetAllRecipeListQuery(int pageNumber, int pageSize)
+        // {
+        //     this.pageNumber = pageNumber;
+        //     this.pageSize = pageSize;
+        // }
     }
 }

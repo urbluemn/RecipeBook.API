@@ -26,6 +26,7 @@ namespace Recipes.Application.Models.Queries.GetModelList
         {
             var recipeQuery = await _dbContext.Recipes
                 .Select(recipe => recipe)
+                //.Skip(request.pageNumber * request.pageSize).Take(request.pageSize)
                 .ProjectTo<RecipeLookupDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 

@@ -35,9 +35,10 @@ namespace Recipes.WebApi.Controllers.v1
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<RecipeListVm>> GetAllRecipes()
+        public async Task<ActionResult<RecipeListVm>> GetAllRecipes(
+            /*[FromQuery]int pageNumber,[FromQuery] int pageSize*/)
         {
-            var query = new GetAllRecipeListQuery();
+            var query = new GetAllRecipeListQuery(/*pageNumber, pageSize*/);
             var vm = await Mediator.Send(query);
             return Ok(vm);
         }
