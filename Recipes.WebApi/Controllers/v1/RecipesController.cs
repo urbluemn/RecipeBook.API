@@ -5,9 +5,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Recipes.Application.Models.Commands.CreateModel;
 using Recipes.Application.Models.Commands.DeleteModel;
+using Recipes.Application.Models.Commands.SaveRecipe.DeleteSaved;
+using Recipes.Application.Models.Commands.SaveRecipe.Save;
 using Recipes.Application.Models.Commands.UpdateModel;
 using Recipes.Application.Models.Queries.GetModelDetails;
 using Recipes.Application.Models.Queries.GetModelList;
+using Recipes.Application.Models.Queries.GetUserSavedRecipes;
 using Recipes.WebApi.Models;
 
 namespace Recipes.WebApi.Controllers.v1
@@ -168,6 +171,54 @@ namespace Recipes.WebApi.Controllers.v1
             {
                 Id = id,
                 UserId = UserId
+            };
+            await Mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpGet("Saved")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<RecipeListVm>> GetUserSavedRecipes()
+        {
+            var query = new GetUserSavedRecipesQuery
+            {
+                UserId = UserId
+            };
+            var vm = await Mediator.Send(query);
+            return Ok(vm);
+        }
+
+        [HttpPost("Save")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> SaveRecipe([FromBody]SaveRecipeDto saveRecipedto)
+        {
+            // var command = new SaveRecipeCommand
+            // {
+            //     UserId = UserId,
+            //     RecipeId = recipeId
+            // };
+            // await Mediator.Send(command);
+
+            var command = _mapper.Map<SaveRecipeCommand>(saveRecipedto);
+            command.UserId = UserId;
+            await Mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete("DeleteSaved/{recipeId}")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> DeleteSavedRecipe(Guid recipeId)
+        {
+            var command = new DeleteSavedRecipeCommand
+            {
+                UserId = UserId,
+                RecipeId = recipeId
             };
             await Mediator.Send(command);
             return NoContent();
